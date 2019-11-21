@@ -29,5 +29,15 @@ export default new Router({
             name: 'Contato',
             component: () => import('./views/ContatoView.vue') 
         },
+        {
+            path: '/cadastro',
+            name: 'Cadastro',
+            component: () => import('./views/CadastroView.vue') 
+        },
+        {
+            path: '/agendar',
+            name: 'Agendar',
+            component: () => import('./views/AgendarView.vue') 
+        },
     ]
 })  
