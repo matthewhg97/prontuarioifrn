@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="prontuarioModelStoreContainer" CdmEntityContainer="prontuarioEntities">
+    <EntitySetMapping Name="consulta">
+      <EntityTypeMapping TypeName="prontuarioModel.consulta">
+        <MappingFragment StoreEntitySet="consulta">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="paciente_id" ColumnName="paciente_id" />
+          <ScalarProperty Name="motivo" ColumnName="motivo" />
+          <ScalarProperty Name="data_consulta" ColumnName="data_consulta" />
+          <ScalarProperty Name="medico_id" ColumnName="medico_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="medico">
+      <EntityTypeMapping TypeName="prontuarioModel.medico">
+        <MappingFragment StoreEntitySet="medico">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="cpf" ColumnName="cpf" />
+          <ScalarProperty Name="crm" ColumnName="crm" />
+          <ScalarProperty Name="especializacao" ColumnName="especializacao" />
+          <ScalarProperty Name="senha" ColumnName="senha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="paciente">
+      <EntityTypeMapping TypeName="prontuarioModel.paciente">
+        <MappingFragment StoreEntitySet="paciente">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="numero" ColumnName="numero" />
+          <ScalarProperty Name="cpf" ColumnName="cpf" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="recepcionista">
+      <EntityTypeMapping TypeName="prontuarioModel.recepcionista">
+        <MappingFragment StoreEntitySet="recepcionista">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="senha" ColumnName="senha" />
+          <ScalarProperty Name="cpf" ColumnName="cpf" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

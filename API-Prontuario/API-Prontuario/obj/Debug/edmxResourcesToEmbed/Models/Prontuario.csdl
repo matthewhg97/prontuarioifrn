@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="prontuarioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="consulta">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="paciente_id" Type="Int32" Nullable="false" />
+    <Property Name="motivo" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="data_consulta" Type="DateTime" Nullable="false" />
+    <Property Name="medico_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="medico" Relationship="Self.fk_medico_id" FromRole="consulta" ToRole="medico" />
+    <NavigationProperty Name="paciente" Relationship="Self.fk_paciente_id" FromRole="consulta" ToRole="paciente" />
+  </EntityType>
+  <EntityType Name="medico">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cpf" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="crm" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="especializacao" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="senha" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="consulta" Relationship="Self.fk_medico_id" FromRole="medico" ToRole="consulta" />
+  </EntityType>
+  <EntityType Name="paciente">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="numero" Type="Int32" Nullable="false" />
+    <Property Name="cpf" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="consulta" Relationship="Self.fk_paciente_id" FromRole="paciente" ToRole="consulta" />
+  </EntityType>
+  <EntityType Name="recepcionista">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="senha" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cpf" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_medico_id">
+    <End Role="medico" Type="Self.medico" Multiplicity="1" />
+    <End Role="consulta" Type="Self.consulta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="medico">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="consulta">
+        <PropertyRef Name="medico_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_paciente_id">
+    <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+    <End Role="consulta" Type="Self.consulta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="paciente">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="consulta">
+        <PropertyRef Name="paciente_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="prontuarioEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="consulta" EntityType="Self.consulta" />
+    <EntitySet Name="medico" EntityType="Self.medico" />
+    <EntitySet Name="paciente" EntityType="Self.paciente" />
+    <EntitySet Name="recepcionista" EntityType="Self.recepcionista" />
+    <AssociationSet Name="fk_medico_id" Association="Self.fk_medico_id">
+      <End Role="medico" EntitySet="medico" />
+      <End Role="consulta" EntitySet="consulta" />
+    </AssociationSet>
+    <AssociationSet Name="fk_paciente_id" Association="Self.fk_paciente_id">
+      <End Role="paciente" EntitySet="paciente" />
+      <End Role="consulta" EntitySet="consulta" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
